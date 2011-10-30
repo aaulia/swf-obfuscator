@@ -63,14 +63,22 @@ class Main {
 			var chk = n[i];
 			var sub = s[i];
 			var len = chk.length;
-			while (pos < (swf.data.length - len)) {
+			var max = swf.data.length - len;
+			var got = 0;
+			
+			Lib.print(chk + ": ");
+			
+			while (pos < max) {
 				if (swf.data.readString(pos, len) != chk) {
 					++pos;
 				} else {
 					swf.data.blit(pos, sub, 0, len);
 					pos += len;
+					++got;
 				}
 			}
+			
+			Lib.println(got + " found");
 		}
 	}
 	
