@@ -24,6 +24,8 @@ typedef SWF = {
 class Main {
 	
 	static function main() {
+		Gc.enable(true);
+		
 		var args = Sys.args();
 		if (args.length < 2) {
 			print_help();
