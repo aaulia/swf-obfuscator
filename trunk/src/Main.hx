@@ -124,8 +124,13 @@ class Main {
 	static private function read_dictionaries(dict:String):Array<String> {
 		var inp = File.read(dict, false);
 		var dct = new Array<String>();
-		while (!inp.eof()) {
-			dct.push(inp.readLine());
+		
+		inp.seek(0, FileSeek.SeekEnd);
+		if (inp.tell() > 0) {
+			inp.seek(0, FileSeek.SeekBegin);
+			while (!inp.eof()) {
+				dct.push(inp.readLine());
+			}
 		}
 		inp.close();
 		dct.sort(function(a, b) { return b.length - a.length; });
