@@ -1,11 +1,19 @@
 package ;
 
-import cpp.io.File;
+import sys.io.File;
+import sys.io.FileSeek;
+#if cpp
 import cpp.Lib;
-import cpp.Sys;
 import cpp.vm.Gc;
 import cpp.zip.Compress;
 import cpp.zip.Uncompress;
+#else 
+import neko.Lib;
+import neko.vm.Gc;
+import neko.zip.Compress;
+import neko.zip.Uncompress;
+#end
+
 import haxe.Int32;
 import haxe.io.Bytes;
 
@@ -17,14 +25,16 @@ import haxe.io.Bytes;
 typedef SWF = {
 	var sig    :String;
 	var version:Int;
-	var length :Int32;
+	var length :Int;
 	var data   :Bytes;
 }
  
 class Main {
 	
 	static function main() {
+		#if cpp
 		Gc.enable(true);
+		#end
 		
 		var args = Sys.args();
 		if (args.length < 2) {
